@@ -11,13 +11,14 @@ public class Player : Actor {
     string lastCheckedHealthStatus;
 
     public void Awake() {
-        instance = this;
+        instance = this;  
     }
 
     public override void Die()
     {
         base.Die();
         gameObject.SetActive(false);
+
     }
 
     public override void Update() {

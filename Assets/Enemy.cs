@@ -10,7 +10,7 @@ public class Enemy : Actor {
 
     private void OnEnable() {
         allEnemies.Add(this);
-        Invoke("SetLivesToZero", 1.0f);
+        Invoke("SetLivesToZero", 0.1f);
     }
 
     public void SetLivesToZero()
@@ -21,8 +21,7 @@ public class Enemy : Actor {
     public override void Start()
     {
         base.Start();
-        healthSystem.lives = 0;
-        healthSystem.shield = 0;
+        
     }
 
     private void OnDisable() {

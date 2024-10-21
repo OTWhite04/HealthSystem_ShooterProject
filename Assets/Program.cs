@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 public class HealthSystem
 {
     // Variables
@@ -6,14 +7,14 @@ public class HealthSystem
     public string healthStatus;
     public int shield;
     public int lives = 3;
-    
+
 
     // Optional XP system variables
-    public int xp;
-    public int level;
+    public int xp = 0;
+    public int level = 1;
 
 
-   
+
 
     public HealthSystem()
     {
@@ -22,35 +23,31 @@ public class HealthSystem
 
 
     public string ShowHUD()
-    {   
+    {
         healthStatus = HealthStatus(health);
-        return $"Health: {health}" + $" Shield: {shield}" + $" Lives: {lives}" + $" HealthStatus: {healthStatus}";
+        return $"Health: {health}" + $" Shield: {shield}" + $" Lives: {lives}" + $" HealthStatus: {healthStatus}" + $"Level: {level}";
     }
 
     public void TakeDamage(int damage)
     {
-        
-        if(shield <= 0)
+
+        if (damage > shield)
         {
-            int remainingDamage = shield;
-           
-            if(damage > shield)
-            {
-                shield = 0;
-                health = health + remainingDamage;
-            }
-           
+            damage = damage - shield;
+            shield = 0;
+            health = health - damage;
+
             if (health <= 0)
             {
+                health = 0;
                 Revive();
             }
-  
         }
         else
         {
             shield = shield - damage;
         }
-        
+
     }
 
     public void Heal(int hp)
@@ -60,27 +57,28 @@ public class HealthSystem
 
     public string HealthStatus(int hp)
     {
-        if (hp <= 100)
+        if (hp <= 100 && hp > 90)
         {
             return "Perfect Health";
         }
-        else if (hp <= 90)
+        else if (hp <= 90 && hp > 75)
         {
             return "Healthy";
         }
-        else if (hp <= 75)
+        else if (hp <= 75 && hp > 50)
         {
             return "Hurt";
         }
-        else if (hp <= 50)
+        else if (hp <= 50 && hp > 10)
         {
             return "Badly Hurt";
         }
-        else
+        else if (hp <= 10 && hp >= 1)
         {
-            return "Imminent Danger";
+            return "Imminant Danger";
         }
-    
+
+        return "Out of Range";
         
     }
 
@@ -95,6 +93,11 @@ public class HealthSystem
         lives = lives - 1;
         health = 100;
         shield = 100;
+
+       if(lives <= 0)
+        {
+            ResetGame();
+        }
     }
 
     public void ResetGame()
@@ -102,12 +105,27 @@ public class HealthSystem
         health = 100;
         shield = 100;
         lives = 3;
+        level = 1;
+        xp = 0;
+    }
+
+    public void Awake()
+    {
         
     }
 
+  
+
+    public static void AllUnityTests()
+    {
+
+    }
     
     public void IncreaseXP(int exp)
     {
-          
+        
+        level = level + exp;
+
+
     }
 }
