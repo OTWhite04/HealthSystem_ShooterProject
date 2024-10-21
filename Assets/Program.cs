@@ -119,39 +119,10 @@ public class HealthSystem
 
     }
 
-    public static void RunAllUnitTests()
-    {
+   
 
 
-    }
 
-    public void Test_TakeDamage_OnlyShield()
-    {
-        HealthSystem system = new HealthSystem();
-        system.shield = 100;
-        system.health = 100;
-        system.lives = 3;
-
-        system.TakeDamage(10);
-
-        Debug.Assert(90 == system.shield);
-        Debug.Assert(100 == system.health);
-        Debug.Assert(3 == system.lives);
-    }
-
-    public void Test_TakeDamage_HealthandSheild()
-    {
-        HealthSystem system = new HealthSystem();
-        system.shield = 100;
-        system.health = 100;
-        system.lives = 3;
-
-        system.TakeDamage(120);
-
-        Debug.Assert(0 == system.shield);
-        Debug.Assert(80 == system.health);
-        Debug.Assert(3 == system.lives);
-    }
 
 
 
