@@ -119,6 +119,12 @@ public class HealthSystem
 
     }
 
+    public static void RunAllUnitTests()
+    {
+
+
+    }
+
     public void Test_TakeDamage_OnlyShield()
     {
         HealthSystem system = new HealthSystem();
@@ -146,6 +152,7 @@ public class HealthSystem
         Debug.Assert(80 == system.health);
         Debug.Assert(3 == system.lives);
     }
+
 
 
 
